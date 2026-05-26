@@ -140,8 +140,55 @@ export default function Dashboard() {
   const [selectedPeriod, setSelectedPeriod] = useState<'1h' | '24h' | '7d' | '30d'>('24h');
 
   const role = (user?.role ?? 'admin') as UserRole;
-  const stats = ROLE_STATS[role];
   const quickActions = ROLE_QUICK_ACTIONS[role];
+
+  const dynamicStats = useMemo(() => {
+    const baseStats = ROLE_STATS[role] || DASHBOARD_STATS;
+    return baseStats.map(stat => {
+      const isDetections = stat.label === 'Detections Today' || stat.label === 'Total Detections' || stat.label === 'Batches Inspected' || stat.label === 'API Calls Today';
+      const isAlerts = stat.label === 'Active Alerts' || stat.label === 'Defects Found' || stat.label === 'Incidents Today';
+      
+      if (isDetections) {
+        let val = stat.value;
+        let change = stat.change;
+        if (selectedPeriod === '1h') {
+          val = stat.label === 'API Calls Today' ? '1.8K' : '731';
+          change = '+2.1%';
+        } else if (selectedPeriod === '24h') {
+          val = stat.label === 'API Calls Today' ? '48.2K' : '12,847';
+          change = '+18.3%';
+        } else if (selectedPeriod === '7d') {
+          val = stat.label === 'API Calls Today' ? '312.4K' : '63,847';
+          change = '+14.2%';
+        } else if (selectedPeriod === '30d') {
+          val = stat.label === 'API Calls Today' ? '1.2M' : '284,912';
+          change = '+22.7%';
+        }
+        return { ...stat, value: val, change };
+      }
+      
+      if (isAlerts) {
+        let val = stat.value;
+        let change = stat.change;
+        if (selectedPeriod === '1h') {
+          val = '2';
+          change = '-1';
+        } else if (selectedPeriod === '24h') {
+          val = '8';
+          change = '-2';
+        } else if (selectedPeriod === '7d') {
+          val = '55';
+          change = '+12';
+        } else if (selectedPeriod === '30d') {
+          val = '248';
+          change = '+45';
+        }
+        return { ...stat, value: val, change };
+      }
+      
+      return stat;
+    });
+  }, [role, selectedPeriod]);
 
   const areaData = useMemo(() => PERIOD_DATA[selectedPeriod], [selectedPeriod]);
   const barData = useMemo(() => BAR_DATA[selectedPeriod], [selectedPeriod]);
@@ -192,7 +239,7 @@ export default function Dashboard() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {stats.map((stat) => {
+          {dynamicStats.map((stat) => {
             const Icon = ICONS[stat.icon];
             return (
               <div key={stat.label} className="p-5 rounded-2xl bg-card border border-border hover:border-indigo-500/30 transition-all duration-200">

@@ -20,6 +20,27 @@ import Profile from '@/pages/Profile';
 import Settings from '@/pages/Settings';
 import NotFound from '@/pages/NotFound';
 
+// New dedicated footer pages
+import AIVision from '@/pages/platform/AIVision';
+import VideoAnalytics from '@/pages/platform/VideoAnalytics';
+import FacialRecognition from '@/pages/platform/FacialRecognition';
+import QualityInspection from '@/pages/platform/QualityInspection';
+import EdgeAIPlatform from '@/pages/platform/EdgeAI';
+import APIPlatform from '@/pages/platform/APIPlatform';
+
+import Careers from '@/pages/company/Careers';
+import Partners from '@/pages/company/Partners';
+
+import Documentation from '@/pages/resources/Documentation';
+import APIReference from '@/pages/resources/APIReference';
+import SDKDownloads from '@/pages/resources/SDKDownloads';
+import StatusPage from '@/pages/resources/StatusPage';
+import Changelog from '@/pages/resources/Changelog';
+
+import CookiePolicy from '@/pages/legal/CookiePolicy';
+import GDPR from '@/pages/legal/GDPR';
+import SecurityPolicy from '@/pages/legal/Security';
+
 // Dashboard sub-pages
 import Alerts from '@/pages/dashboard/Alerts';
 import Monitor from '@/pages/dashboard/Monitor';
@@ -52,6 +73,30 @@ function AppShell() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+
+        {/* Platform routes */}
+        <Route path="/platform/ai-vision" element={<AIVision />} />
+        <Route path="/platform/video-analytics" element={<VideoAnalytics />} />
+        <Route path="/platform/facial-recognition" element={<FacialRecognition />} />
+        <Route path="/platform/quality-inspection" element={<QualityInspection />} />
+        <Route path="/platform/edge-ai-iot" element={<EdgeAIPlatform />} />
+        <Route path="/platform/api-platform" element={<APIPlatform />} />
+
+        {/* Company routes */}
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/partners" element={<Partners />} />
+
+        {/* Resources routes */}
+        <Route path="/documentation" element={<Documentation />} />
+        <Route path="/api-reference" element={<APIReference />} />
+        <Route path="/sdk-downloads" element={<SDKDownloads />} />
+        <Route path="/status" element={<StatusPage />} />
+        <Route path="/changelog" element={<Changelog />} />
+
+        {/* Legal routes */}
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
+        <Route path="/gdpr" element={<GDPR />} />
+        <Route path="/security" element={<SecurityPolicy />} />
 
         {/* Auth pages */}
         <Route path="/login" element={<Login />} />
