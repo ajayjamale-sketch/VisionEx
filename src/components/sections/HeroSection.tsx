@@ -12,6 +12,11 @@ const BADGES = [
 export default function HeroSection() {
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  const handleWatchDemo = () => {
+    navigate(user ? '/dashboard' : '/login');
+  };
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
       {/* Grid background */}
@@ -63,15 +68,16 @@ export default function HeroSection() {
                 {user ? 'Go to Dashboard' : 'Start Free Trial'}
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <a
-                href="#demo"
+              <button
+                type="button"
+                onClick={handleWatchDemo}
                 className="inline-flex items-center gap-2 px-6 py-3 border border-border text-foreground font-medium rounded-xl hover:bg-muted hover:border-indigo-500/50 transition-all duration-300"
               >
                 <div className="w-7 h-7 rounded-full bg-indigo-600/20 flex items-center justify-center">
                   <Play className="w-3 h-3 text-indigo-400 fill-indigo-400" />
                 </div>
                 Watch Demo
-              </a>
+              </button>
             </div>
 
             {/* Social proof */}
