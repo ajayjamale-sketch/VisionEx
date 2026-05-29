@@ -102,12 +102,12 @@ export default function APIPlatform() {
                 )}
                 {selectedLanguage === 'node' && (
                   <pre className="whitespace-pre-wrap leading-relaxed">
-                    const { VisionEx } = require('visionex');<br /><br />
-                    const client = new VisionEx(&#123; apiKey: 'vx_key_...' &#125;);<br />
-                    client.detect.object(&#123;<br />
+                    const {"{"} VisionEx {"}"} = require('visionex');<br /><br />
+                    const client = new VisionEx({"{"} apiKey: 'vx_key_...' {"}"});<br />
+                    client.detect.object({"{"}<br />
                     &nbsp;&nbsp;image: './img.jpg',<br />
                     &nbsp;&nbsp;model: 'object_detection_v2'<br />
-                    &#125;).then(res =&gt; console.log(res.data));
+                    {"}"}).then(res =&gt; console.log(res.data));
                   </pre>
                 )}
               </div>
