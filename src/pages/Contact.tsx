@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useScrollTop } from '@/hooks/useScrollTop';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, Users, Zap } from 'lucide-react';
 import { toast } from 'sonner';
@@ -60,17 +61,22 @@ export default function Contact() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-3 gap-4 mb-16">
             {[
-              { icon: Zap, title: 'Sales & Demos', desc: 'Schedule a live demo and discuss how VisionEx fits your needs.', action: 'Book a Demo', color: 'text-indigo-400' },
-              { icon: Users, title: 'Enterprise', desc: 'Custom pricing, on-premise deployment, and dedicated support.', action: 'Talk to Sales', color: 'text-cyan-400' },
-              { icon: MessageSquare, title: 'Support', desc: 'Technical questions or account help from our expert team.', action: 'Open Ticket', color: 'text-electric-400' },
-            ].map(({ icon: Icon, title, desc, action, color }) => (
+              { icon: Zap, title: 'Sales & Demos', desc: 'Schedule a live demo and discuss how VisionEx fits your needs.', action: 'Book a Demo', color: 'text-indigo-400', href: '/contact/demo' },
+              { icon: Users, title: 'Enterprise', desc: 'Custom pricing, on-premise deployment, and dedicated support.', action: 'Talk to Sales', color: 'text-cyan-400', href: '/contact/sales' },
+              { icon: MessageSquare, title: 'Support', desc: 'Technical questions or account help from our expert team.', action: 'Open Ticket', color: 'text-electric-400', href: '/contact/support' },
+            ].map(({ icon: Icon, title, desc, action, color, href }) => (
               <div key={title} className="p-6 rounded-2xl bg-card border border-border hover:border-indigo-500/30 transition-all duration-200 text-center">
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600/20 to-cyan-500/20 flex items-center justify-center mx-auto mb-4">
                   <Icon className={`w-5 h-5 ${color}`} />
                 </div>
                 <h3 className="font-heading font-semibold text-foreground mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{desc}</p>
-                <button className={`text-sm font-medium ${color} hover:opacity-80 transition-opacity`}>{action} →</button>
+                <Link 
+                  to={href}
+                  className={`text-sm font-medium ${color} hover:opacity-80 transition-opacity inline-flex items-center gap-1`}
+                >
+                  {action} →
+                </Link>
               </div>
             ))}
           </div>
@@ -107,7 +113,7 @@ export default function Contact() {
                 {!submitted ? (
                   <>
                     <h2 className="font-heading text-xl font-bold text-foreground mb-6">Send us a message</h2>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form id="contact-form" onSubmit={handleSubmit} className="space-y-4">
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-foreground mb-1.5">Full Name *</label>

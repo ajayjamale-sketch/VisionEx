@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Video, Bell, Brain, Search, Settings, User,
   LogOut, Menu, X, ChevronDown, Sun, Moon, BarChart3, Shield,
-  FileText, Cpu, Users, Zap, Wrench, Activity, Home
+  FileText, Cpu, Users, Zap, Wrench, Activity, Home, UserCheck, Network
 } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,8 +19,10 @@ const NAV_BY_ROLE: Record<UserRole, { icon: React.ElementType; label: string; hr
     { icon: Brain, label: 'AI Models', href: '/dashboard/models' },
     { icon: BarChart3, label: 'Analytics', href: '/dashboard/analytics' },
     { icon: Shield, label: 'Security', href: '/dashboard/security' },
+    { icon: UserCheck, label: 'Identity', href: '/dashboard/identity' },
     { icon: FileText, label: 'OCR / Docs', href: '/dashboard/ocr' },
     { icon: Cpu, label: 'Edge AI', href: '/dashboard/edge' },
+    { icon: Network, label: 'Integrations', href: '/dashboard/integrations' },
     { icon: Users, label: 'Team & Users', href: '/dashboard/users' },
     { icon: Settings, label: 'Settings', href: '/settings' },
   ],
@@ -29,6 +31,7 @@ const NAV_BY_ROLE: Record<UserRole, { icon: React.ElementType; label: string; hr
     { icon: Video, label: 'Live Monitor', href: '/dashboard/monitor' },
     { icon: Bell, label: 'Alerts', href: '/dashboard/alerts', badge: 8 },
     { icon: Shield, label: 'Incidents', href: '/dashboard/security' },
+    { icon: UserCheck, label: 'Identity', href: '/dashboard/identity' },
     { icon: BarChart3, label: 'Analytics', href: '/dashboard/analytics' },
     { icon: Settings, label: 'Settings', href: '/settings' },
   ],
@@ -36,6 +39,7 @@ const NAV_BY_ROLE: Record<UserRole, { icon: React.ElementType; label: string; hr
     { icon: LayoutDashboard, label: 'Overview', href: '/dashboard' },
     { icon: Brain, label: 'AI Models', href: '/dashboard/models' },
     { icon: Cpu, label: 'Edge AI', href: '/dashboard/edge' },
+    { icon: Network, label: 'Integrations', href: '/dashboard/integrations' },
     { icon: BarChart3, label: 'Analytics', href: '/dashboard/analytics' },
     { icon: FileText, label: 'OCR / Docs', href: '/dashboard/ocr' },
     { icon: Settings, label: 'Settings', href: '/settings' },
@@ -52,6 +56,7 @@ const NAV_BY_ROLE: Record<UserRole, { icon: React.ElementType; label: string; hr
     { icon: Users, label: 'User Management', href: '/dashboard/users' },
     { icon: Activity, label: 'System Health', href: '/dashboard/system' },
     { icon: Shield, label: 'Security Logs', href: '/dashboard/security' },
+    { icon: Network, label: 'Integrations', href: '/dashboard/integrations' },
     { icon: BarChart3, label: 'Usage Analytics', href: '/dashboard/analytics' },
     { icon: Settings, label: 'Settings', href: '/settings' },
   ],

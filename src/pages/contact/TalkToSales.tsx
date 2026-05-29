@@ -1,0 +1,99 @@
+import { useState } from 'react';
+import { useScrollTop } from '@/hooks/useScrollTop';
+import { Users, CheckCircle, ArrowRight, MessageCircle } from 'lucide-react';
+import { toast } from 'sonner';
+
+export default function TalkToSales() {
+  useScrollTop();
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', size: '', message: '' });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    await new Promise(r => setTimeout(r, 1000));
+    setLoading(false);
+    setSubmitted(true);
+    toast.success("Sales inquiry received!");
+  };
+
+  return (
+    <div className="page-transition min-h-screen bg-background">
+      <section className="relative pt-28 pb-16 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-64 bg-cyan-500/10 rounded-full blur-3xl" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-medium mb-6">
+            <Users className="w-3.5 h-3.5" /> Enterprise Sales
+          </div>
+          <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-4">
+            Talk to our <span className="text-gradient-cyan-blue">Sales Team</span>
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Discuss custom pricing, on-premise deployments, and discover how VisionEx can scale within your enterprise.
+          </p>
+        </div>
+      </section>
+
+      <section className="pb-24 relative z-10">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6">
+          <div className="p-8 rounded-2xl bg-card border border-border shadow-card-dark">
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Full Name</label>
+                    <input type="text" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Work Email</label>
+                    <input type="email" required value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Phone Number</label>
+                    <input type="tel" required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Company</label>
+                    <input type="text" required value={form.company} onChange={e => setForm({...form, company: e.target.value})} className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Company Size</label>
+                  <select required value={form.size} onChange={e => setForm({...form, size: e.target.value})} className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50">
+                    <option value="">Select size...</option>
+                    <option value="1-50">1-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="201-1000">201-1000 employees</option>
+                    <option value="1000+">1000+ employees</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">How can we help?</label>
+                  <textarea rows={4} required value={form.message} onChange={e => setForm({...form, message: e.target.value})} className="w-full px-4 py-2.5 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-none" />
+                </div>
+                <button type="submit" disabled={loading} className="w-full py-3 bg-gradient-to-r from-cyan-600 to-blue-500 text-white font-semibold rounded-xl hover:shadow-glow-cyan transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2 mt-4">
+                  {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><MessageCircle className="w-4 h-4" /> Contact Sales</>}
+                </button>
+              </form>
+            ) : (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-500" />
+                </div>
+                <h3 className="font-heading text-2xl font-bold text-foreground mb-2">Message Sent!</h3>
+                <p className="text-muted-foreground mb-6">An enterprise account executive will contact you shortly.</p>
+                <button onClick={() => window.history.back()} className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors">
+                  <ArrowRight className="w-4 h-4 rotate-180" /> Return
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

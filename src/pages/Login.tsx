@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, LogIn, AlertCircle, Zap } from 'lucide-react';
 import { useAuth, DEMO_USERS } from '@/hooks/useAuth';
@@ -29,8 +29,14 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [demoLoading, setDemoLoading] = useState<UserRole | null>(null);
-  const { login, loginAsRole, loading } = useAuth();
+  const { user, login, loginAsRole, loading } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
 
   const validate = () => {
     const errs: { email?: string; password?: string } = {};

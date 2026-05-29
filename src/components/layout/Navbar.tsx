@@ -6,12 +6,13 @@ import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
-  { label: 'Platform', href: '/features', children: [
-    { label: 'AI Vision Engine', href: '/features#vision' },
-    { label: 'Video Analytics', href: '/features#video' },
-    { label: 'Facial Recognition', href: '/features#facial' },
-    { label: 'Quality Inspection', href: '/features#quality' },
-    { label: 'Edge AI & IoT', href: '/features#edge' },
+  { label: 'Platform', href: '/platform', children: [
+    { label: 'AI Vision Engine', href: '/platform/ai-vision' },
+    { label: 'Video Analytics', href: '/platform/video-analytics' },
+    { label: 'Facial Recognition', href: '/platform/facial-recognition' },
+    { label: 'Quality Inspection', href: '/platform/quality-inspection' },
+    { label: 'Edge AI & IoT', href: '/platform/edge-ai-iot' },
+    { label: 'API Platform', href: '/platform/api-platform' },
   ]},
   { label: 'Pricing', href: '/pricing' },
   { label: 'Blog', href: '/blog' },
@@ -100,7 +101,7 @@ export default function Navbar() {
                 )}
 
                 {link.children && activeDropdown === link.label && (
-                  <div className="absolute top-full left-0 mt-2 w-52 glass-card rounded-xl shadow-lg p-1 border border-border animate-fade-in">
+                  <div className="absolute top-full left-0 mt-2 w-52 bg-background rounded-xl shadow-lg p-1 border border-border animate-fade-in">
                     {link.children.map((child) => (
                       <Link
                         key={child.label}
@@ -137,7 +138,7 @@ export default function Navbar() {
                   <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
                 </button>
                 {userMenuOpen && (
-                  <div className="absolute top-full right-0 mt-2 w-52 glass-card rounded-xl shadow-lg p-1 border border-border animate-fade-in">
+                  <div className="absolute top-full right-0 mt-2 w-52 bg-background rounded-xl shadow-lg p-1 border border-border animate-fade-in">
                     <Link to="/dashboard" className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
                       <LayoutDashboard className="w-4 h-4" /> Dashboard
                     </Link>

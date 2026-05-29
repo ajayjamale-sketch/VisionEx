@@ -9,12 +9,18 @@ import Features from '@/pages/Features';
 import Pricing from '@/pages/Pricing';
 import Contact from '@/pages/Contact';
 import Blog from '@/pages/Blog';
+import BlogDetail from '@/pages/BlogDetail';
 import FAQ from '@/pages/FAQ';
 import Privacy from '@/pages/Privacy';
 import Terms from '@/pages/Terms';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import ForgotPassword from '@/pages/ForgotPassword';
+
+// Contact Sub-pages
+import BookDemo from '@/pages/contact/BookDemo';
+import TalkToSales from '@/pages/contact/TalkToSales';
+import SupportTicket from '@/pages/contact/SupportTicket';
 import Dashboard from '@/pages/Dashboard';
 import Profile from '@/pages/Profile';
 import Settings from '@/pages/Settings';
@@ -52,6 +58,8 @@ import Security from '@/pages/dashboard/Security';
 import EdgeAI from '@/pages/dashboard/EdgeAI';
 import OCRDocs from '@/pages/dashboard/OCR';
 import SystemHealth from '@/pages/dashboard/SystemHealth';
+import Identity from '@/pages/dashboard/Identity';
+import Integrations from '@/pages/dashboard/Integrations';
 
 const STANDALONE_ROUTES = ['/login', '/register', '/forgot-password', '/dashboard', '/profile', '/settings'];
 
@@ -64,12 +72,17 @@ function AppShell() {
       {!isStandalone && <Navbar />}
       <Routes>
         {/* Public pages */}
+        
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/features" element={<Features />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/contact/demo" element={<BookDemo />} />
+        <Route path="/contact/sales" element={<TalkToSales />} />
+        <Route path="/contact/support" element={<SupportTicket />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
@@ -115,6 +128,8 @@ function AppShell() {
         <Route path="/dashboard/edge" element={<EdgeAI />} />
         <Route path="/dashboard/ocr" element={<OCRDocs />} />
         <Route path="/dashboard/system" element={<SystemHealth />} />
+        <Route path="/dashboard/identity" element={<Identity />} />
+        <Route path="/dashboard/integrations" element={<Integrations />} />
 
         {/* User pages */}
         <Route path="/profile" element={<Profile />} />

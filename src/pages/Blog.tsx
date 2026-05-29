@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useScrollTop } from '@/hooks/useScrollTop';
+import { Link } from 'react-router-dom';
 import { BLOG_POSTS } from '@/constants/data';
 import { Clock, ArrowRight, Search } from 'lucide-react';
 
@@ -79,9 +80,9 @@ export default function Blog() {
                   </div>
                   <h2 className="font-heading text-2xl font-bold text-foreground mb-3 group-hover:text-indigo-400 transition-colors">{filtered[0].title}</h2>
                   <p className="text-muted-foreground mb-5 leading-relaxed">{filtered[0].excerpt}</p>
-                  <button className="inline-flex items-center gap-2 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
+                  <Link to={`/blog/${filtered[0].slug}`} className="inline-flex items-center gap-2 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
                     Read Article <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -90,7 +91,7 @@ export default function Blog() {
           {/* Posts grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.slice(1).map(post => (
-              <div key={post.id} className="rounded-2xl overflow-hidden border border-border bg-card hover:border-indigo-500/30 transition-all duration-200 group cursor-pointer">
+              <Link to={`/blog/${post.slug}`} key={post.id} className="rounded-2xl overflow-hidden border border-border bg-card hover:border-indigo-500/30 transition-all duration-200 group cursor-pointer block">
                 <div className="relative overflow-hidden">
                   <img src={post.image} alt={post.title} className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute top-3 left-3">
@@ -105,12 +106,12 @@ export default function Blog() {
                   </div>
                   <h3 className="font-heading font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-indigo-400 transition-colors">{post.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{post.excerpt}</p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-auto pt-4">
                     <span className="text-xs text-muted-foreground">{post.author}</span>
-                    <button className="text-xs text-indigo-400 flex items-center gap-1 hover:text-indigo-300 transition-colors">Read <ArrowRight className="w-3 h-3" /></button>
+                    <span className="text-xs text-indigo-400 flex items-center gap-1 group-hover:text-indigo-300 transition-colors">Read <ArrowRight className="w-3 h-3" /></span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
